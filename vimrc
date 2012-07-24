@@ -10,7 +10,7 @@ let mapleader=","
 let current_file=expand("<sfile>")
 let current_file=resolve(current_file)
 let current_file=fnamemodify(current_file,":p:h")
-let current_file=current_file . "/vim"
+let current_file=current_file . "/"
 let &runtimepath=current_file . ",".$VIMRUNTIME
 "echo current_file
 "echo &runtimepath
@@ -37,9 +37,16 @@ else
     set t_Co=256
 endif
 
+" Don't backup files in Dropbox
+autocmd BufNewFile,BufRead */Dropbox/* set nobackup nowritebackup noswapfile
+
+
 if &diff
     set nospell
 endif
+
+nnoremap <space> za
+vnoremap <space> zf
 
 if v:version >= 703
     set undodir=~/.vimundos
