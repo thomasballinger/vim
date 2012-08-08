@@ -22,18 +22,24 @@ call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
 if has("gui_running")
-    set guifont=Liberation\ Mono\ 10
-    set lines=60
-    set columns=100
-    set keymodel=
-    set nomousehide
     "colorscheme solarized
-    set guioptions-=T
+    set autochdir
     set background=light
-else
-    "colorscheme solarized
-    set background=dark
+    set columns=100
+    set guifont=Liberation\ Mono\ 10
+    set guioptions-=L
+    set guioptions-=R
+    set guioptions-=T
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=m
+    set guioptions-=r
+    set keymodel=
+    set lines=60
+    set nomousehide
     set t_Co=256
+else
+    set background=dark
 endif
 
 " Don't backup files in Dropbox
@@ -44,22 +50,23 @@ if &diff
     set nospell
 endif
 
-nnoremap <space> za
-vnoremap <space> zf
-
 if v:version >= 703
     set undodir=~/.vimundos
     set undofile
 else
-    echo "you are using an old version, upgrade!"
+    echo "you are using an old version of vim, upgrade!"
 endif
 
-setlocal tabstop=4
-setlocal softtabstop=4
-setlocal shiftwidth=4
+
 setlocal smarttab
 setlocal expandtab
 set autoindent
+set smartindent
+
+" default - set other stuff in ftplugins
+setlocal tabstop=4
+setlocal softtabstop=4
+setlocal shiftwidth=4
 
 set wildmenu
 set wildmode=longest,list
@@ -71,6 +78,8 @@ set clipboard+=unnamed
 
 " I'd rather toggle it manually
 set nofoldenable
+nnoremap <space> za
+vnoremap <space> zf
 
 "Training Tools
 "to help me learn not to use the arrow keys in cmd mode:
@@ -87,15 +96,20 @@ map k gk
 "Really Custom Stuff
 
 "nerdtree settings
-nmap ,m :NERDTreeToggle<CR>
-nmap ,n :NERDTreeFind<CR>
+nmap <leader>m :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeFind<CR>
 
+
+"Window stuff
+set splitright
 "easier moving between windows
 nmap <C-j> :wincmd j<CR>
 nmap <C-k> :wincmd k<CR>
 nmap <C-h> :wincmd h<CR>
 nmap <C-l> :wincmd l<CR>
 
+"makes c-w work in insert
+imap <C-w> <C-O><C-w>
 
 
 
@@ -115,6 +129,7 @@ nnoremap ;; <c-^>
 map <silent> <leader>VV :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <leader>r :registers<CR>
 cmap w!! w !sudo tee % >/dev/null
+
 
 au filetype help set nonumber
 au filetype help set nospell
@@ -137,7 +152,6 @@ let g:SuperTabLongestEnhanced = 1
 let g:SuperTabCrMapping = 1
 set completeopt+=longest
 "highlight Pmenu ctermfg=1 ctermbg=4 guibg=30
-
 "colors
 syntax enable
 
@@ -151,6 +165,11 @@ set smartcase " Ignore case when searching lowercase
 set showcmd
 set ruler " Show ruler
 set scrolloff=3 " keep 3 lines when scrolling
+set laststatus=2 "show the statusline, even with just one file open
+let g:Powerline_symbols = 'fancy'
+
+
+
 
 "set cursorline
 set number
