@@ -1,5 +1,4 @@
-" this is thomas ballinger's mobile vimrc file
-"
+" Thomas Ballinger's vimrc
 "
 
 set nocompatible
@@ -67,6 +66,7 @@ set wildmode=longest,list
 set wildignore+=*.swp,*.bak,*.pyc
 set title
 
+" this works with tmux only if you reattache to user space
 set clipboard+=unnamed
 
 " I'd rather toggle it manually
@@ -106,6 +106,8 @@ nmap <C-l> :wincmd l<CR>
 call arpeggio#load()
 Arpeggioimap jk <Esc>
 Arpeggiocmap jk 
+
+
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
 map <leader>V :

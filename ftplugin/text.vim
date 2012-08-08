@@ -1,2 +1,2 @@
 setlocal nonu
-setlocal spell
+"setlocal spell

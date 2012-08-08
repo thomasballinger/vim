@@ -1,3 +1,5 @@
 .netrwhist
 .VimballRecord
 bundle/*
+*.swp
+*.swo
