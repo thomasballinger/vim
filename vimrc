@@ -166,7 +166,13 @@ set showcmd
 set ruler " Show ruler
 set scrolloff=3 " keep 3 lines when scrolling
 set laststatus=2 "show the statusline, even with just one file open
-let g:Powerline_symbols = 'fancy'
+
+set statusline=%{fugitive#statusline()}
+set laststatus=2 
+if has("statusline") 
+        set statusline=%<%f\ %{fugitive#statusline()}%h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}][U+%04B]\ %-12.(%l,%c%V%)\ %P 
+endif
+
 
 
 

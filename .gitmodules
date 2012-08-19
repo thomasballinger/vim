@@ -34,3 +34,6 @@
 [submodule "bundle/simplenote"]
 	path = bundle/simplenote
 	url = https://github.com/mrtazz/simplenote.vim.git
+[submodule "bundle/vimerl"]
+	path = bundle/vimerl
+	url = https://github.com/jimenezrick/vimerl.git
