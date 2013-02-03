@@ -1,8 +1,8 @@
 " this is javascript mocha specific stuff - gets loaded on filetype detection
 "
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal softtabstop=4
 
 setlocal nowrap
 map! <F5> <Esc>:w<CR>:!node % <CR>

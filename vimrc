@@ -59,12 +59,15 @@ endif
 
 
 setlocal smarttab
+" this is the one that causes tabs to be inserted instead of spaces in insert
+" mode
 setlocal expandtab
 set autoindent
 set smartindent
 
 " default - set other stuff in ftplugins
 setlocal tabstop=4
+" find out why I use this
 setlocal softtabstop=4
 setlocal shiftwidth=4
 
