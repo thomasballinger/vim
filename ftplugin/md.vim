@@ -6,4 +6,3 @@ setlocal nowrap
 
 map! <F5> <Esc>:w<CR>:!md_preview.py % <CR>
 map  <F5> <Esc>:w<CR>:!md_preview.py % <CR>
-
