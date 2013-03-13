@@ -21,8 +21,8 @@ if &ft == "c"
 endif
 
 if &ft == "objc"
-  map! <F5> <Esc>:w<CR>:!gcc -framework Foundation *.m -o out; ./out <CR>
-  map <F5> <Esc>:w<CR>:!gcc -framework Foundation *.m -o out; ./out <CR>
+  map! <F5> <Esc>:w<CR>:!clang -framework Foundation -fobjc-arc -g -lobjc *.m -o out; ./out <CR>
+  map <F5> <Esc>:w<CR>:!clang -framework Foundation -fobjc-arc -g -lobjc *.m -o out; ./out <CR>
   echo "objective c vim config loaded"
 endif
 
