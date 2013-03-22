@@ -1,6 +1,5 @@
 " Thomas Ballinger's vimrc
 "
-
 set nocompatible
 let mapleader=","
 
@@ -45,7 +44,6 @@ endif
 " Don't backup files in Dropbox
 autocmd BufNewFile,BufRead */Dropbox/* set nobackup nowritebackup noswapfile
 
-
 if &diff
     set nospell
 endif
@@ -57,7 +55,7 @@ else
     echo "you are using an old version of vim, upgrade!"
 endif
 
-
+" Helps for 
 setlocal smarttab
 " this is the one that causes tabs to be inserted instead of spaces in insert
 " mode
