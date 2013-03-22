@@ -98,7 +98,7 @@ if v:version >= 703
     set undodir=~/.vimundos
     set undofile
 else
-    echo "you are using an old version of vim, upgrade!"
+    "echo "you are using an old version of vim, upgrade!"
 endif
 
 " Helps for 
