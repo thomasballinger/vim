@@ -3,20 +3,66 @@
 set nocompatible
 let mapleader=","
 
+filetype off
+
 "set runtimepath=/path-to-config/config/vim,$VIMRUNTIME
-"This does the above in a more generic way
+"This does the above in a more generic way:
+" it adds the folder this vimrc file is in to the rtp
 let current_file=expand("<sfile>")
 let current_file=resolve(current_file)
-let current_file=fnamemodify(current_file,":p:h")
-let current_file=current_file . "/"
-let &runtimepath=current_file . ",".$VIMRUNTIME
-"echo current_file
-"echo &runtimepath
-unlet current_file
+let current_folder=fnamemodify(current_file,":p:h")
+let current_folder=current_folder . "/"
+let &runtimepath=current_folder . ",".$VIMRUNTIME
 
-filetype off
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+"vundle setup
+let &runtimepath=&runtimepath.",". current_folder . "/bundle/vundle"
+unlet current_file
+unlet current_folder
+"echo &runtimepath
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+" :BundleInstall to install
+
+" Bundles I'm trying out
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'mrtazz/simplenote.vim'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'ZoomWin'
+Bundle 'AndrewRadev/sideways.vim'
+    nnoremap <leader>h :SidewaysLeft<CR>
+    nnoremap <leader>l :SidewaysRight<CR>
+Bundle 'Rip-Rip/clang_complete'
+
+" Bundles I'm attached to
+Bundle 'ervandew/supertab'
+    let g:SuperTabDefaultCompletionType = "context"
+    let g:SuperTabLongestHighlight = 0
+    let g:SuperTabLongestEnhanced = 1
+    let g:SuperTabCrMapping = 1
+    set completeopt+=longest
+Bundle 'jimenezrick/vimerl'
+Bundle 'kana/vim-arpeggio'
+    "My Escape Key - I like jk, but chorded, so I use Arpeggio
+    call arpeggio#load()
+    if exists("*arpeggio#load")
+        Arpeggioimap jk <Esc>
+        Arpeggiocmap jk 
+        Arpeggioimap JK <Esc>
+        Arpeggiocmap JK 
+    else
+        imap kj <Esc>
+        imap jk <Esc>
+    endif
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mitechiu/pyflakes-pathogen'
+Bundle 'scrooloose/nerdtree'
+    nmap <leader>m :NERDTreeToggle<CR>
+    nmap <leader>n :NERDTreeFind<CR>
 
 filetype plugin indent on
 
@@ -57,8 +103,7 @@ endif
 
 " Helps for 
 setlocal smarttab
-" this is the one that causes tabs to be inserted instead of spaces in insert
-" mode
+" this is the one that causes tabs to be inserted instead of spaces in insert mode
 setlocal expandtab
 set autoindent
 set smartindent
@@ -87,19 +132,14 @@ vnoremap <space> zf
 
 "map <left> <nop>
 "map <right> <nop>
-"but up and down are used by the mouse scroll wheel, which I use
-"map <up> <nop>
-"map <down> <nop>
+""but up and down are used by the mouse scroll wheel, which I use
+""map <up> <nop>
+""map <down> <nop>
 
 map j gj
 map k gk
 
 "Really Custom Stuff
-
-"nerdtree settings
-nmap <leader>m :NERDTreeToggle<CR>
-nmap <leader>n :NERDTreeFind<CR>
-
 
 "Window stuff
 set splitright
@@ -112,15 +152,6 @@ nmap <C-l> :wincmd l<CR>
 "makes c-w work in insert
 imap <C-w> <C-O><C-w>
 
-
-
-"My Escape Key - I like jk, but chorded, so I use Arpeggio
-"imap jj <Esc>
-"imap kj <Esc>
-"imap jk <Esc>
-call arpeggio#load()
-Arpeggioimap jk <Esc>
-Arpeggiocmap jk 
 
 
 
@@ -146,12 +177,6 @@ set noerrorbells
 set visualbell t_vb=
 set autoread
 
-" Best autocompletion ever!
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabLongestHighlight = 0
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabCrMapping = 1
-set completeopt+=longest
 "highlight Pmenu ctermfg=1 ctermbg=4 guibg=30
 "colors
 syntax enable
@@ -174,23 +199,12 @@ if has("statusline")
         set statusline=%<%f\ %{fugitive#statusline()}%h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}][U+%04B]\ %-12.(%l,%c%V%)\ %P 
 endif
 
-
-
-
-
 "set cursorline
 set number
 
 " show matching pairs like () and {}
 set showmatch
 set matchtime=3
-
-" Line Wrapping 
-" This should depend on the file!
-"set nowrap
-"set linebreak  " Wrap at word dfasa sdf asdf asd f asdf asd fas d fasd fas df asd fasd f asdf dasf asd fasd fasdf
-"set wrap
-
 
 ab funciton function
 ab funtcion function
