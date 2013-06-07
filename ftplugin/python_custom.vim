@@ -7,6 +7,21 @@ setlocal shiftwidth=4
 setlocal smarttab
 setlocal expandtab
 
+ab function function
+abb <buffer> improt import
+abb <buffer> imrpot import
+abb <buffer> imrpt import
+abb <buffer> imrpot import
+
+abb <buffer> lamda lambda
+abb <buffer> lamdba lambda
+abb <buffer> lmabda lambda
+
+abb <buffer> continu continue
+abb <buffer> contineu continue
+
+abb <buffer> prnt print
+
 "automatic return when inserting beyond 80th char
 "setlocal textwidth=80
 

@@ -3,6 +3,11 @@
 set nocompatible
 let mapleader=","
 
+" cursor shape in insert mode, for terminals like Konsole and iTerm2
+" doesn't work in terminal multiplexers, which I always use, so a bit silly
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
 filetype off
 
 "set runtimepath=/path-to-config/config/vim,$VIMRUNTIME
@@ -25,6 +30,8 @@ Bundle 'gmarik/vundle'
 " :BundleInstall to install
 
 " Bundles I'm trying out
+Bundle 'repos-scala/scala-vundle'
+Bundle 'sophacles/vim-processing'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mrtazz/simplenote.vim'
 Bundle 'scrooloose/nerdcommenter'
@@ -36,6 +43,8 @@ Bundle 'AndrewRadev/sideways.vim'
     nnoremap <leader>h :SidewaysLeft<CR>
     nnoremap <leader>l :SidewaysRight<CR>
 Bundle 'Rip-Rip/clang_complete'
+Bundle 'guns/vim-clojure-static'
+Bundle 'paredit.vim'
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
@@ -210,3 +219,24 @@ ab funciton function
 ab funtcion function
 ab funcion  function
 ab funtion  function
+
+function! Refresh_python
+  redir => message
+  silent execute a:cmd
+  redir END
+  let pyfile = substitute(bufname("%"), ".hy", ".py", "")
+  exec '!~/hy/bin/hy2py % > ' . pyfile
+  vsplit
+  e pyfile
+  silent put=message
+  set nomodified
+endfunction
+command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+
+" Hack to use clojure filetype for hy
+autocmd BufNewFile,BufRead *.hy set filetype=clojure
+autocmd BufNewFile,BufRead *.hy map! <F5> <Esc>:w<CR>:!hy % <CR>
+autocmd BufNewFile,BufRead *.hy map  <F5> <Esc>:w<CR>:!hy % <CR>
+autocmd BufNewFile,BufRead *.hy map! <F4> <Esc>:w<CR>:!~/hy/bin/hy2py % <CR>
+autocmd BufNewFile,BufRead *.hy map <F4> <Esc>:w<CR>:!~/hy/bin/hy2py % <CR>
+

@@ -8,4 +8,5 @@
 	  au! BufRead,BufNewFile *.Rnw            setf rnoweb
 	  au! BufRead,BufNewFile *.md             setf md
 	  au! BufRead,BufNewFile *-mochatests.js  setf mochatests
+	  au! BufRead,BufNewFile *.hy             setf hy
 	augroup END
