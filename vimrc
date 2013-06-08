@@ -144,7 +144,7 @@ set wildmode=longest,list
 set wildignore+=*.swp,*.bak,*.pyc
 set title
 
-" this works with tmux only if you reattache to user space
+" this works with tmux only if you reattach to user space
 set clipboard+=unnamed
 
 " I'd rather toggle it manually
@@ -161,10 +161,12 @@ vnoremap <space> zf
 ""map <up> <nop>
 ""map <down> <nop>
 
+
+"scrolling
 map j gj
 map k gk
 
-"Really Custom Stuff
+set nostartofline
 
 "Window stuff
 set splitright
@@ -181,6 +183,7 @@ imap <C-w> <C-O><C-w>
 
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
+"why in the world would this be useful?
 map <leader>V :
 nnoremap ;; <c-^>
 map <silent> <leader>VV :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
