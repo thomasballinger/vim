@@ -239,23 +239,58 @@ ab funtcion function
 ab funcion  function
 ab funtion  function
 
-function! Refresh_python
+function! g:Refresh_hy_python_preview()
   redir => message
-  silent execute a:cmd
   redir END
-  let pyfile = substitute(bufname("%"), ".hy", ".py", "")
-  exec '!~/hy/bin/hy2py % > ' . pyfile
-  vsplit
-  e pyfile
-  silent put=message
+  let pyfile = substitute(bufname("%"), ".hy", "", "") . ".generated.py"
+  let errfile = substitute(bufname("%"), ".hy", "", "") . ".error"
+  exec "silent !~/hy/bin/hy2py % > " . pyfile . " 2> " . errfile . " || cat " . errfile . " > " . pyfile
+  call MyPreviewVSplit(pyfile)
   set nomodified
+  "exec "silent !rm " . pyfile . " " . errfile
+  redraw!
 endfunction
-command! -nargs=+ -complete=command TabMessage call TabMessage(<q-args>)
+
+function! MyPreviewVSplit( fname )
+    let curbufnum=bufwinnr("%")
+    let bufnum=bufnr(expand(a:fname))
+    let winnum=bufwinnr(bufnum)
+    if winnum != -1
+        exe winnum . "wincmd w"
+        e
+    else
+        " Make new split as usual
+        exe "vsplit " . a:fname
+    endif
+    filetype detect
+    exe curbufnum . "wincmd w"
+endfunction
+
+let g:autoHyPythonPreview = 0
+
+function! g:ToggleAutoHyPythonPreview()
+    if g:autoHyPythonPreview == 0
+        "au BufWritePost * call g:Refresh_hy_python_preview()
+        au CursorHold *.hy call g:Refresh_hy_python_preview()
+        au CursorHoldI *.hy call g:Refresh_hy_python_preview()
+        echo "Hy -> Python preview turned on"
+        set updatetime=500
+        let g:autoHyPythonPreview = 1
+    else
+        "au! BufWritePost
+        let g:autoHyPythonPreview = 0
+        au! CursorHold
+        au! CursorHoldI
+        set updatetime=4000
+        echo "Hy -> Python preview turned off"
+    endif
+endfunction
 
 " Hack to use clojure filetype for hy
 autocmd BufNewFile,BufRead *.hy set filetype=clojure
-autocmd BufNewFile,BufRead *.hy map! <F5> <Esc>:w<CR>:!hy % <CR>
-autocmd BufNewFile,BufRead *.hy map  <F5> <Esc>:w<CR>:!hy % <CR>
-autocmd BufNewFile,BufRead *.hy map! <F4> <Esc>:w<CR>:!~/hy/bin/hy2py % <CR>
-autocmd BufNewFile,BufRead *.hy map <F4> <Esc>:w<CR>:!~/hy/bin/hy2py % <CR>
-
+autocmd BufNewFile,BufRead *.hy map! <buffer> <F5> <Esc>:w<CR>:!hy % <CR>
+autocmd BufNewFile,BufRead *.hy map  <buffer> <F5> <Esc>:w<CR>:!hy % <CR>
+autocmd BufNewFile,BufRead *.hy map! <buffer> <F4> <Esc>:w<CR>:call g:Refresh_hy_python_preview()<CR>
+autocmd BufNewFile,BufRead *.hy map  <buffer> <F4> <Esc>:w<CR>:call g:Refresh_hy_python_preview()<CR>
+autocmd BufNewFile,BufRead *.hy map! <buffer> <F3> :call g:ToggleAutoHyPythonPreview()<CR>
+autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPreview()<CR>
