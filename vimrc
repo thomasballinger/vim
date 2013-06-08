@@ -124,7 +124,7 @@ if v:version >= 703
     set undofile
     nnoremap U :GundoToggle<CR>
 else
-    echo "you are using an old version of vim, upgrade!"
+    "echo "you are using an old version of vim, upgrade!"
 endif
 
 setlocal smarttab

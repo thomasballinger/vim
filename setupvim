@@ -1,0 +1,10 @@
+#!/bin/sh
+
+DIR=$( cd "$( dirname "$0" )" && pwd )
+cd $DIR
+git clone https://github.com/gmarik/vundle.git bundle/vundle
+
+echo 'replacing ~/.vimrc with link to this one, moving old one to ~/oldvimrc'
+mv ~/.vimrc ~/oldvimrc
+ln -s $DIR/vimrc ~/.vimrc
+vim +BundleInstall +qall
