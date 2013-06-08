@@ -29,10 +29,10 @@ setlocal nowrap
 
 setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
-map! <F5> <Esc>:w<CR>:!python % <CR>
-map  <F5> <Esc>:w<CR>:!python % <CR>
-map! <F4> <Esc>:w<CR>:!pylint % <CR>
-map  <F4> <Esc>:w<CR>:!pylint % <CR>
+map! <buffer> <F5> <Esc>:w<CR>:!python % <CR>
+map  <buffer> <F5> <Esc>:w<CR>:!python % <CR>
+map! <buffer> <F4> <Esc>:w<CR>:!pylint % <CR>
+map  <buffer> <F4> <Esc>:w<CR>:!pylint % <CR>
 set omnifunc=pythoncomplete#Complete
 
 "au BufReadPost quickfix map <buffer> <silent> <CR> :.cc <CR> :ccl
