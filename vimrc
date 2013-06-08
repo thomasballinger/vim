@@ -45,6 +45,7 @@ Bundle 'AndrewRadev/sideways.vim'
 Bundle 'Rip-Rip/clang_complete'
 Bundle 'guns/vim-clojure-static'
 Bundle 'paredit.vim'
+Bundle 'sjl/gundo.vim'
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
@@ -103,14 +104,29 @@ if &diff
     set nospell
 endif
 
+function! EnsureDirExists (dir)
+  " from http://stackoverflow.com/a/8462159/398212, for windows compat
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir,'p')
+      echo "Created directory: " . a:dir
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
+
 if v:version >= 703
-    set undodir=~/.vimundos
+    " I'm confused about when ~ works for $HOME
+    let myundofile = $HOME . '/.vimundos'
+    call EnsureDirExists(myundofile)
+    set undodir=.vimundos
     set undofile
+    nnoremap U :GundoToggle<CR>
 else
     echo "you are using an old version of vim, upgrade!"
 endif
 
-" Helps for 
 setlocal smarttab
 " this is the one that causes tabs to be inserted instead of spaces in insert mode
 setlocal expandtab
