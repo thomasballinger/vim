@@ -46,6 +46,7 @@ Bundle 'Rip-Rip/clang_complete'
 Bundle 'guns/vim-clojure-static'
 Bundle 'paredit.vim'
 Bundle 'sjl/gundo.vim'
+Bundle 'JuliaLang/julia-vim'
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
@@ -234,10 +235,17 @@ set number
 set showmatch
 set matchtime=3
 
-ab funciton function
-ab funtcion function
+ab fucnotin function
+ab fucntion function
+ab fucntion function
 ab funcion  function
+ab funciotn function
+ab funciton function
+ab functino function
+ab functoin function
+ab funtcion function
 ab funtion  function
+ab funtoin  function
 
 function! g:Refresh_hy_python_preview()
   redir => message
