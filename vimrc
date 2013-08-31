@@ -47,6 +47,11 @@ Bundle 'guns/vim-clojure-static'
 Bundle 'paredit.vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'JuliaLang/julia-vim'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'chrisbra/color_highlight'
+
+Bundle 'Valloric/YouCompleteMe'
+" see https://github.com/Valloric/YouCompleteMe for installation instructions
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
@@ -70,10 +75,13 @@ Bundle 'kana/vim-arpeggio'
     endif
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
-Bundle 'mitechiu/pyflakes-pathogen'
+Bundle 'mitechie/pyflakes-pathogen'
 Bundle 'scrooloose/nerdtree'
     nmap <leader>m :NERDTreeToggle<CR>
     nmap <leader>n :NERDTreeFind<CR>
+    let NERDTreeIgnore = ['\.pyc$']
+
+nmap <leader>i :so $MYVIMRC<CR>:BundleInstall<CR>
 
 filetype plugin indent on
 
@@ -185,6 +193,7 @@ imap <C-w> <C-O><C-w>
 
 autocmd! bufwritepost .vimrc source ~/.vimrc
 "why in the world would this be useful?
+"
 map <leader>V :
 nnoremap ;; <c-^>
 map <silent> <leader>VV :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
@@ -302,3 +311,5 @@ autocmd BufNewFile,BufRead *.hy map! <buffer> <F4> <Esc>:w<CR>:call g:Refresh_hy
 autocmd BufNewFile,BufRead *.hy map  <buffer> <F4> <Esc>:w<CR>:call g:Refresh_hy_python_preview()<CR>
 autocmd BufNewFile,BufRead *.hy map! <buffer> <F3> :call g:ToggleAutoHyPythonPreview()<CR>
 autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPreview()<CR>
+
+:let g:colorizer_auto_filetype='css,scss,html'

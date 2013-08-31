@@ -7,7 +7,7 @@ setlocal shiftwidth=4
 setlocal smarttab
 setlocal expandtab
 
-ab function function
+abb function function
 abb <buffer> improt import
 abb <buffer> imrpot import
 abb <buffer> imrpt import
@@ -31,8 +31,8 @@ setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ 
 setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
 map! <buffer> <F5> <Esc>:w<CR>:!python % <CR>
 map  <buffer> <F5> <Esc>:w<CR>:!python % <CR>
-map! <buffer> <F4> <Esc>:w<CR>:!pylint % <CR>
-map  <buffer> <F4> <Esc>:w<CR>:!pylint % <CR>
+map! <buffer> <F4> <Esc>:w<CR>:!pylint -r n % <CR>
+map  <buffer> <F4> <Esc>:w<CR>:!pylint -r n % <CR>
 set omnifunc=pythoncomplete#Complete
 
 "au BufReadPost quickfix map <buffer> <silent> <CR> :.cc <CR> :ccl
