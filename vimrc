@@ -49,6 +49,9 @@ Bundle 'sjl/gundo.vim'
 Bundle 'JuliaLang/julia-vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'chrisbra/color_highlight'
+Bundle 'jnwhiteh/vim-golang'
+Bundle 'Blackrush/vim-gocode'
+Bundle 'tpope/vim-rsi.git'
 
 Bundle 'Valloric/YouCompleteMe'
 " see https://github.com/Valloric/YouCompleteMe for installation instructions
@@ -162,8 +165,19 @@ nnoremap <space> za
 vnoremap <space> zf
 
 "Training Tools
-"to help me learn not to use the arrow keys in cmd mode:
+"
+"to get me to stop hitting :w all the time:
+function Annoy ()
+    for i in [1, 2, 3]
+        echo "Stop that!"
+        sleep 1
+    endfor
+    echo "Stop that!"
+endfunction
+command W call Annoy()
+ca w W
 
+"to help me learn not to use the arrow keys in cmd mode:
 "map <left> <nop>
 "map <right> <nop>
 ""but up and down are used by the mouse scroll wheel, which I use
@@ -255,6 +269,12 @@ ab functoin function
 ab funtcion function
 ab funtion  function
 ab funtoin  function
+
+" text corrections
+
+ab langauges languages
+ab langauge language
+
 
 function! g:Refresh_hy_python_preview()
   redir => message

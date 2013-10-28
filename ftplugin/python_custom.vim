@@ -29,10 +29,12 @@ setlocal nowrap
 
 setlocal makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 setlocal efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m 
-map! <buffer> <F5> <Esc>:w<CR>:!python % <CR>
-map  <buffer> <F5> <Esc>:w<CR>:!python % <CR>
-map! <buffer> <F4> <Esc>:w<CR>:!pylint -r n % <CR>
-map  <buffer> <F4> <Esc>:w<CR>:!pylint -r n % <CR>
+map! <buffer> <F5> <Esc>:write<CR>:!python % <CR>
+map  <buffer> <F5> <Esc>:write<CR>:!python % <CR>
+map! <buffer> <F4> <Esc>:write<CR>:!pylint -r n % <CR>
+map  <buffer> <F4> <Esc>:write<CR>:!pylint -r n % <CR>
+map! <buffer> <F6> <Esc>:write<CR>:!bpython -i n % <CR>
+map  <buffer> <F6> <Esc>:write<CR>:!bpython -i % <CR>
 set omnifunc=pythoncomplete#Complete
 
 "au BufReadPost quickfix map <buffer> <silent> <CR> :.cc <CR> :ccl
@@ -90,10 +92,10 @@ def DebugWithOrWithoutBreakpoints():
             breaks = True
             break
     if breaks:
-        vim.command( ':w')
+        vim.command( ':write')
         vim.command(':!python %')
     else:
-        vim.command( ':w')
+        vim.command( ':write')
         vim.command(':!python -m pudb.run %')
 #vim.command( 'map <F6> :py DebugWithOrWithoutBreakpoints()<cr>')
 #vim.command( 'map! <F6> <Esc>:py DebugWithOrWithoutBreakpoints()<cr>')
