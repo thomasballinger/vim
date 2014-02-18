@@ -33,8 +33,10 @@ map! <buffer> <F5> <Esc>:write<CR>:!python % <CR>
 map  <buffer> <F5> <Esc>:write<CR>:!python % <CR>
 map! <buffer> <F4> <Esc>:write<CR>:!pylint -r n % <CR>
 map  <buffer> <F4> <Esc>:write<CR>:!pylint -r n % <CR>
-map! <buffer> <F6> <Esc>:write<CR>:!bpython -i n % <CR>
-map  <buffer> <F6> <Esc>:write<CR>:!bpython -i % <CR>
+map! <buffer> <F6> <Esc>:write<CR>:!bpython-curtsies -t % <CR>
+map  <buffer> <F6> <Esc>:write<CR>:!bpython-curtsies -t % <CR>
+vmap <buffer> <F6> <Esc>:write! /tmp/tmp.py<CR>:!clear<CR>:silent !bpython-curtsies -t /tmp/tmp.py <CR>
+vmap <buffer> <C-s> <Esc>:write! /tmp/tmp.py<CR>:!clear<CR>:silent !bpython-curtsies -t /tmp/tmp.py <CR>
 set omnifunc=pythoncomplete#Complete
 
 "au BufReadPost quickfix map <buffer> <silent> <CR> :.cc <CR> :ccl

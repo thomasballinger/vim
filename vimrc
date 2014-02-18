@@ -52,6 +52,13 @@ Bundle 'chrisbra/color_highlight'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'tpope/vim-rsi.git'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+Bundle 'tpope/vim-fireplace'
+Bundle 'tpope/vim-classpath'
+Bundle 'guns/vim-clojure-static'
 
 Bundle 'Valloric/YouCompleteMe'
 " see https://github.com/Valloric/YouCompleteMe for installation instructions
@@ -174,8 +181,8 @@ function Annoy ()
     endfor
     echo "Stop that!"
 endfunction
-command W call Annoy()
-ca w W
+"command W call Annoy()
+"ca w W
 
 "to help me learn not to use the arrow keys in cmd mode:
 "map <left> <nop>
@@ -184,6 +191,8 @@ ca w W
 ""map <up> <nop>
 ""map <down> <nop>
 
+"Disable Ex mode, which I hit a lot by accident because ctrl-q is my tmux key
+nnoremap Q <nop>
 
 "scrolling
 map j gj
@@ -322,6 +331,11 @@ function! g:ToggleAutoHyPythonPreview()
         echo "Hy -> Python preview turned off"
     endif
 endfunction
+
+" Hacker to use .py for .tac files
+autocmd BufNewFile,BufRead *.tac set filetype=python
+autocmd BufNewFile,BufRead *.tac map! <buffer> <F5> <Esc>:w<CR>:!twistd -ny % <CR>
+autocmd BufNewFile,BufRead *.tac map  <buffer> <F5> <Esc>:w<CR>:!twistd -ny % <CR>
 
 " Hack to use clojure filetype for hy
 autocmd BufNewFile,BufRead *.hy set filetype=clojure

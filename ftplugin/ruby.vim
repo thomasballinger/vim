@@ -15,6 +15,8 @@ setlocal nowrap
 map! <F5> <Esc>:w<CR>:!ruby % <CR>
 map  <F5> <Esc>:w<CR>:!ruby % <CR>
 
+map! <F6> <Esc>:w<CR>:!rspec % <CR>
+map  <F6> <Esc>:w<CR>:!rspec % <CR>
 
 map! <F3> <Esc>:w<CR>:!ruby path_to_enlightenment.rb <CR>
 map  <F3> <Esc>:w<CR>:!ruby path_to_enlightenment.rb <CR>
