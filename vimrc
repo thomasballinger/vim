@@ -170,6 +170,13 @@ set title
 " this works with tmux only if you reattach to user space
 set clipboard+=unnamed
 
+" mouse support!
+set mouse+=a
+" http://superuser.com/a/550482/53713
+if &term =~ '^screen-256color'
+    set ttymouse=xterm2
+endif
+
 " I'd rather toggle it manually
 set nofoldenable
 nnoremap <space> za
