@@ -1,5 +1,5 @@
 " Thomas Ballinger's vimrc
-"
+" stuff
 set nocompatible
 let mapleader=","
 
@@ -59,7 +59,11 @@ Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
 Bundle 'guns/vim-clojure-static'
-
+Bundle 'kien/rainbow_parentheses.vim'
+    au VimEnter * RainbowParenthesesToggle
+    au Syntax * RainbowParenthesesLoadRound
+    au Syntax * RainbowParenthesesLoadSquare
+    au Syntax * RainbowParenthesesLoadBraces
 Bundle 'Valloric/YouCompleteMe'
 " see https://github.com/Valloric/YouCompleteMe for installation instructions
 
@@ -139,8 +143,8 @@ if v:version >= 703
     " I'm confused about when ~ works for $HOME
     let myundofile = $HOME . '/.vimundos'
     call EnsureDirExists(myundofile)
-    set undodir=.vimundos
     set undofile
+    let &undodir = myundofile
     nnoremap U :GundoToggle<CR>
 else
     "echo "you are using an old version of vim, upgrade!"
@@ -174,7 +178,7 @@ vnoremap <space> zf
 "Training Tools
 "
 "to get me to stop hitting :w all the time:
-function Annoy ()
+function! Annoy ()
     for i in [1, 2, 3]
         echo "Stop that!"
         sleep 1
@@ -202,11 +206,6 @@ set nostartofline
 
 "Window stuff
 set splitright
-"easier moving between windows
-nmap <C-j> :wincmd j<CR>
-nmap <C-k> :wincmd k<CR>
-nmap <C-h> :wincmd h<CR>
-nmap <C-l> :wincmd l<CR>
 
 "makes c-w work in insert
 imap <C-w> <C-O><C-w>
