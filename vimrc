@@ -66,6 +66,7 @@ Bundle 'kien/rainbow_parentheses.vim'
     au Syntax * RainbowParenthesesLoadBraces
 Bundle 'Valloric/YouCompleteMe'
 " see https://github.com/Valloric/YouCompleteMe for installation instructions
+Bundle 'mitsuhiko/vim-jinja.git'
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
