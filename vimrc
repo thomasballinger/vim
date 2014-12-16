@@ -58,7 +58,6 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
-Bundle 'guns/vim-clojure-static'
 Bundle 'kien/rainbow_parentheses.vim'
     au VimEnter * RainbowParenthesesToggle
     au Syntax * RainbowParenthesesLoadRound
