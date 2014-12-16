@@ -25,11 +25,11 @@ unlet current_file
 unlet current_folder
 "echo &runtimepath
 call vundle#rc()
-Bundle 'gmarik/vundle'
 
 " :BundleInstall to install
 
 " Bundles I'm trying out
+Bundle 'ivanov/vim-ipython'
 Bundle 'repos-scala/scala-vundle'
 Bundle 'sophacles/vim-processing'
 Bundle 'altercation/vim-colors-solarized'
@@ -67,6 +67,10 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Valloric/YouCompleteMe'
 " see https://github.com/Valloric/YouCompleteMe for installation instructions
 Bundle 'mitsuhiko/vim-jinja.git'
+Bundle 'tpope/vim-abolish'
+Bundle 'greyblake/vim-preview'
+Bundle 'alfredodeza/coveragepy.vim'
+Bundle 'AndrewRadev/linediff.vim'
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
@@ -90,7 +94,10 @@ Bundle 'kana/vim-arpeggio'
     endif
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
-Bundle 'mitechie/pyflakes-pathogen'
+"Bundle 'mitechie/pyflakes-pathogen'
+"Bundle 'scrooloose/syntastic'
+    let g:syntastic_disabled_filetypes=['rst']
+
 Bundle 'scrooloose/nerdtree'
     nmap <leader>m :NERDTreeToggle<CR>
     nmap <leader>n :NERDTreeFind<CR>
@@ -339,7 +346,7 @@ function! g:ToggleAutoHyPythonPreview()
     endif
 endfunction
 
-" Hacker to use .py for .tac files
+" Hack to use .py for .tac files
 autocmd BufNewFile,BufRead *.tac set filetype=python
 autocmd BufNewFile,BufRead *.tac map! <buffer> <F5> <Esc>:w<CR>:!twistd -ny % <CR>
 autocmd BufNewFile,BufRead *.tac map  <buffer> <F5> <Esc>:w<CR>:!twistd -ny % <CR>
@@ -354,3 +361,5 @@ autocmd BufNewFile,BufRead *.hy map! <buffer> <F3> :call g:ToggleAutoHyPythonPre
 autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPreview()<CR>
 
 :let g:colorizer_auto_filetype='css,scss,html'
+
+
