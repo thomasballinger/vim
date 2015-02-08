@@ -63,13 +63,19 @@ Bundle 'kien/rainbow_parentheses.vim'
     au Syntax * RainbowParenthesesLoadRound
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 " see https://github.com/Valloric/YouCompleteMe for installation instructions
 Bundle 'mitsuhiko/vim-jinja.git'
 Bundle 'tpope/vim-abolish'
 Bundle 'greyblake/vim-preview'
 Bundle 'alfredodeza/coveragepy.vim'
 Bundle 'AndrewRadev/linediff.vim'
+Bundle 'benmills/vimux'
+    nnoremap <leader>a :VimuxRunCommand<CR>
+Bundle 'pitluga/vimux-nose-test'
+    nnoremap <leader>t :RunAllNoseTests<CR>
+    nnoremap <leader>s :RunFocusedNoseTests<CR>
+
 
 " Bundles I'm attached to
 Bundle 'ervandew/supertab'
@@ -94,7 +100,7 @@ Bundle 'kana/vim-arpeggio'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 "Bundle 'mitechie/pyflakes-pathogen'
-"Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
     let g:syntastic_disabled_filetypes=['rst']
 
 Bundle 'scrooloose/nerdtree'
@@ -231,7 +237,7 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 "why in the world would this be useful?
 "
 map <leader>V :
-nnoremap ;; <c-^>
+"nnoremap ;; <c-^>
 map <silent> <leader>VV :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 map <leader>r :registers<CR>
 cmap w!! w !sudo tee % >/dev/null
@@ -361,4 +367,5 @@ autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPre
 
 :let g:colorizer_auto_filetype='css,scss,html'
 
-
+"while my left shift key doesn't work
+:nmap ; :
