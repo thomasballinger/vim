@@ -1,5 +1,6 @@
 " Thomas Ballinger's vimrc
 " stuff
+"
 set nocompatible
 let mapleader=","
 
@@ -59,7 +60,8 @@ Bundle 'mattn/gist-vim'
 Bundle 'tpope/vim-fireplace'
 Bundle 'tpope/vim-classpath'
 Bundle 'kien/rainbow_parentheses.vim'
-    au VimEnter * RainbowParenthesesToggle
+    au VimEnter *
+                \ try | exec RainbowParenthesesToggle | catch | | endtry
     au Syntax * RainbowParenthesesLoadRound
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
@@ -87,7 +89,10 @@ Bundle 'ervandew/supertab'
 Bundle 'jimenezrick/vimerl'
 Bundle 'kana/vim-arpeggio'
     "My Escape Key - I like jk, but chorded, so I use Arpeggio
-    call arpeggio#load()
+    try
+        call arpeggio#load()
+    catch
+    endtry
     if exists("*arpeggio#load")
         Arpeggioimap jk <Esc>
         Arpeggiocmap jk 
@@ -273,10 +278,10 @@ set ruler " Show ruler
 set scrolloff=3 " keep 3 lines when scrolling
 set laststatus=2 "show the statusline, even with just one file open
 
-set statusline=%{fugitive#statusline()}
 set laststatus=2 
+set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''} 
 if has("statusline") 
-        set statusline=%<%f\ %{fugitive#statusline()}%h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}][U+%04B]\ %-12.(%l,%c%V%)\ %P 
+    set statusline=%<%f\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}%h%m%r%=%k[%{(&fenc\ ==\ \"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}][U+%04B]\ %-12.(%l,%c%V%)\ %P 
 endif
 
 "set cursorline
