@@ -1,7 +1,13 @@
 " Thomas Ballinger's vimrc
 " stuff
 "
+
 set nocompatible
+
+
+
+
+
 let mapleader=","
 
 " cursor shape in insert mode, for terminals like Konsole and iTerm2
@@ -11,109 +17,115 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 filetype off
 
-"set runtimepath=/path-to-config/config/vim,$VIMRUNTIME
-"This does the above in a more generic way:
+
+if 1
+    " requred for neobundle: https://github.com/Shougo/neobundle.vim
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shougo/neobundle.vim'
+
+
+
+    " Bundles I'm trying out
+    "NeoBundle 'ivanov/vim-ipython'
+    NeoBundle 'AndrewRadev/linediff.vim'
+    NeoBundle 'Blackrush/vim-gocode'
+    NeoBundle 'Rip-Rip/clang_complete'
+    NeoBundle 'alfredodeza/coveragepy.vim'
+    NeoBundle 'chrisbra/color_highlight'
+    NeoBundle 'greyblake/vim-preview'
+    NeoBundle 'guns/vim-clojure-static'
+    NeoBundle 'guns/vim-sexp'
+    NeoBundle 'hail2u/vim-css3-syntax'
+    NeoBundle 'jimenezrick/vimerl'
+    NeoBundle 'jnwhiteh/vim-golang'
+    NeoBundle 'mattn/gist-vim'
+    NeoBundle 'mattn/webapi-vim'
+    NeoBundle 'mitsuhiko/vim-jinja'
+    NeoBundle 'mrtazz/simplenote.vim'
+    NeoBundle 'paredit.vim'
+    NeoBundle 'repos-scala/scala-vundle'
+    NeoBundle 'rizzatti/dash.vim'
+    NeoBundle 'rizzatti/funcoo.vim'
+    NeoBundle 'scrooloose/nerdcommenter'
+    NeoBundle 'sjl/gundo.vim'
+    NeoBundle 'sophacles/vim-processing'
+    NeoBundle 'tpope/vim-abolish'
+    NeoBundle 'tpope/vim-classpath'
+    "NeoBundle 'tpope/vim-endwise'
+    NeoBundle 'tpope/vim-fireplace'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'tpope/vim-repeat'
+    NeoBundle 'tpope/vim-rsi'
+    NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'rust-lang/rust.vim'
+
+    " Plugins with options
+    NeoBundle 'AndrewRadev/sideways.vim'
+        nnoremap <leader>h :SidewaysLeft<CR>
+        nnoremap <leader>l :SidewaysRight<CR>
+    NeoBundle 'kien/rainbow_parentheses.vim'
+        au VimEnter *
+                    \ try | exec RainbowParenthesesToggle | catch | | endtry
+        au Syntax * RainbowParenthesesLoadRound
+        au Syntax * RainbowParenthesesLoadSquare
+        au Syntax * RainbowParenthesesLoadBraces
+    "Bundle 'Valloric/YouCompleteMe'
+    " see https://github.com/Valloric/YouCompleteMe for installation instructions
+
+    NeoBundle 'ervandew/supertab'
+        let g:SuperTabDefaultCompletionType = "context"
+        let g:SuperTabLongestHighlight = 0
+        let g:SuperTabLongestEnhanced = 1
+        let g:SuperTabCrMapping = 1
+        set completeopt+=longest
+    NeoBundle 'kana/vim-arpeggio'
+    NeoBundle 'kchmck/vim-coffee-script'
+    NeoBundle 'kien/ctrlp.vim'
+    NeoBundle 'mitechie/pyflakes-pathogen'
+    NeoBundle 'scrooloose/syntastic', { 'for': ['javascript', 'python'] }
+    NeoBundle 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    NeoBundle 'Xuyuanp/nerdtree-git-plugin',  { 'on':  'NERDTreeToggle' }
+
+    call neobundle#end()
+    NeoBundleCheck
+endif
+
+let g:syntastic_python_checkers=['flake8']
+
+nmap <leader>m :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeFind<CR>
+let NERDTreeIgnore = ['\.pyc$']
+
 " it adds the folder this vimrc file is in to the rtp
 let current_file=expand("<sfile>")
 let current_file=resolve(current_file)
 let current_folder=fnamemodify(current_file,":p:h")
 let current_folder=current_folder . "/"
-let &runtimepath=current_folder . ",".$VIMRUNTIME
-
-"vundle setup
-let &runtimepath=&runtimepath.",". current_folder . "/bundle/vundle"
+let &runtimepath=&runtimepath . "," . current_folder
+let &runtimepath=&runtimepath . "," . current_folder . "/after"
 unlet current_file
 unlet current_folder
-"echo &runtimepath
-call vundle#rc()
-
-" :BundleInstall to install
-
-" Bundles I'm trying out
-Bundle 'ivanov/vim-ipython'
-Bundle 'repos-scala/scala-vundle'
-Bundle 'sophacles/vim-processing'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'mrtazz/simplenote.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'ZoomWin'
-Bundle 'AndrewRadev/sideways.vim'
-    nnoremap <leader>h :SidewaysLeft<CR>
-    nnoremap <leader>l :SidewaysRight<CR>
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'guns/vim-clojure-static'
-Bundle 'paredit.vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'JuliaLang/julia-vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'chrisbra/color_highlight'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'Blackrush/vim-gocode'
-Bundle 'tpope/vim-rsi.git'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
-Bundle 'tpope/vim-fireplace'
-Bundle 'tpope/vim-classpath'
-Bundle 'kien/rainbow_parentheses.vim'
-    au VimEnter *
-                \ try | exec RainbowParenthesesToggle | catch | | endtry
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
-"Bundle 'Valloric/YouCompleteMe'
-" see https://github.com/Valloric/YouCompleteMe for installation instructions
-Bundle 'mitsuhiko/vim-jinja.git'
-Bundle 'tpope/vim-abolish'
-Bundle 'greyblake/vim-preview'
-Bundle 'alfredodeza/coveragepy.vim'
-Bundle 'AndrewRadev/linediff.vim'
-Bundle 'benmills/vimux'
-    nnoremap <leader>a :VimuxRunCommand<CR>
-Bundle 'pitluga/vimux-nose-test'
-    nnoremap <leader>t :RunAllNoseTests<CR>
-    nnoremap <leader>s :RunFocusedNoseTests<CR>
 
 
-" Bundles I'm attached to
-Bundle 'ervandew/supertab'
-    let g:SuperTabDefaultCompletionType = "context"
-    let g:SuperTabLongestHighlight = 0
-    let g:SuperTabLongestEnhanced = 1
-    let g:SuperTabCrMapping = 1
-    set completeopt+=longest
-Bundle 'jimenezrick/vimerl'
-Bundle 'kana/vim-arpeggio'
-    "My Escape Key - I like jk, but chorded, so I use Arpeggio
-    try
-        call arpeggio#load()
-    catch
-    endtry
-    if exists("*arpeggio#load")
-        Arpeggioimap jk <Esc>
-        Arpeggiocmap jk 
-        Arpeggioimap JK <Esc>
-        Arpeggiocmap JK 
-    else
-        imap kj <Esc>
-        imap jk <Esc>
-    endif
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-"Bundle 'mitechie/pyflakes-pathogen'
-Bundle 'scrooloose/syntastic'
-    let g:syntastic_disabled_filetypes=['rst']
+" set default 'runtimepath' (without ~/.vim folders)
+"let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME, $VIM)
 
-Bundle 'scrooloose/nerdtree'
-    nmap <leader>m :NERDTreeToggle<CR>
-    nmap <leader>n :NERDTreeFind<CR>
-    let NERDTreeIgnore = ['\.pyc$']
+" what is the name of the directory containing this file?
+"let s:portable = expand('<sfile>:p:h')
 
-nmap <leader>i :so $MYVIMRC<CR>:BundleInstall<CR>
+" add the directory to 'runtimepath'
+"let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
+
+
+
+
+
+
+
+
 
 filetype plugin indent on
 
@@ -303,6 +315,8 @@ ab funtcion function
 ab funtion  function
 ab funtoin  function
 
+ab protptype prototype
+
 " text corrections
 
 ab langauges languages
@@ -374,3 +388,9 @@ autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPre
 
 "while my left shift key doesn't work
 :nmap ; :
+
+
+set cpoptions+=ces$
+
+    imap kj <Esc>
+    imap jk <Esc>

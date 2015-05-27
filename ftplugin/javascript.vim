@@ -21,4 +21,6 @@ setlocal errorformat=%f:\ line\ %l\\,\ col\ %c\\,\ %m
 
 ab func function(
 
+ab def function
+
 ab raise throw
