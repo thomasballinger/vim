@@ -3,11 +3,6 @@
 "
 
 set nocompatible
-
-
-
-
-
 let mapleader=","
 
 " cursor shape in insert mode, for terminals like Konsole and iTerm2
@@ -61,6 +56,7 @@ if 1
     NeoBundle 'tpope/vim-sexp-mappings-for-regular-people'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'rust-lang/rust.vim'
+    NeoBundle 'bronson/vim-trailing-whitespace'
 
     " Plugins with options
     NeoBundle 'AndrewRadev/sideways.vim'
@@ -72,7 +68,7 @@ if 1
         au Syntax * RainbowParenthesesLoadRound
         au Syntax * RainbowParenthesesLoadSquare
         au Syntax * RainbowParenthesesLoadBraces
-    "Bundle 'Valloric/YouCompleteMe'
+    NeoBundle 'Valloric/YouCompleteMe'
     " see https://github.com/Valloric/YouCompleteMe for installation instructions
 
     NeoBundle 'ervandew/supertab'
@@ -85,7 +81,7 @@ if 1
     NeoBundle 'kchmck/vim-coffee-script'
     NeoBundle 'kien/ctrlp.vim'
     NeoBundle 'mitechie/pyflakes-pathogen'
-    NeoBundle 'scrooloose/syntastic', { 'for': ['javascript', 'python'] }
+    NeoBundle 'scrooloose/syntastic', { 'for': ['javascript', 'python', 'haskell'] }
     NeoBundle 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     NeoBundle 'Xuyuanp/nerdtree-git-plugin',  { 'on':  'NERDTreeToggle' }
 
@@ -191,6 +187,7 @@ setlocal tabstop=4
 " find out why I use this
 setlocal softtabstop=4
 setlocal shiftwidth=4
+
 
 set wildmenu
 set wildmode=longest,list
@@ -387,10 +384,8 @@ autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPre
 :let g:colorizer_auto_filetype='css,scss,html'
 
 "while my left shift key doesn't work
-:nmap ; :
-
+":nmap ; :
+:nmap ; h
 
 set cpoptions+=ces$
 
-    imap kj <Esc>
-    imap jk <Esc>
