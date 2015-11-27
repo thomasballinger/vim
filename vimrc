@@ -15,12 +15,10 @@ filetype off
 
 if 1
     " requred for neobundle: https://github.com/Shougo/neobundle.vim
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    set runtimepath+=~/tomconfig/vim/bundle/neobundle.vim/
 
     call neobundle#begin(expand('~/.vim/bundle/'))
     NeoBundleFetch 'Shougo/neobundle.vim'
-
-
 
     " Bundles I'm trying out
     "NeoBundle 'ivanov/vim-ipython'
@@ -63,11 +61,11 @@ if 1
         nnoremap <leader>h :SidewaysLeft<CR>
         nnoremap <leader>l :SidewaysRight<CR>
     NeoBundle 'kien/rainbow_parentheses.vim'
-        au VimEnter *
-                    \ try | exec RainbowParenthesesToggle | catch | | endtry
         au Syntax * RainbowParenthesesLoadRound
         au Syntax * RainbowParenthesesLoadSquare
         au Syntax * RainbowParenthesesLoadBraces
+"        au VimEnter *
+"                    \ try | exec RainbowParenthesesToggle | catch | | endtry
     NeoBundle 'Valloric/YouCompleteMe'
     " see https://github.com/Valloric/YouCompleteMe for installation instructions
 
@@ -85,11 +83,33 @@ if 1
     NeoBundle 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     NeoBundle 'Xuyuanp/nerdtree-git-plugin',  { 'on':  'NERDTreeToggle' }
 
+    NeoBundle 'bitc/vim-hdevtools'
+
+    NeoBundle 'zah/nimrod.vim'
+
     call neobundle#end()
     NeoBundleCheck
 endif
 
+"""
+" syntastic recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers=['flake8']
+"""
+
+"""
+"haskell stuff as per http://www.stephendiehl.com/posts/vim_haskell.html
+au FileType haskell nnoremap <buffer> <leader>t :HdevtoolsType<CR>
+au FileType haskell nnoremap <buffer> <silent> <leader><space> :HdevtoolsClear<CR>
+au FileType haskell nnoremap <buffer> <silent> <leader>T :HdevtoolsInfo<CR>
+"""
 
 nmap <leader>m :NERDTreeToggle<CR>
 nmap <leader>n :NERDTreeFind<CR>
@@ -205,9 +225,9 @@ if &term =~ '^screen-256color'
 endif
 
 " I'd rather toggle it manually
-set nofoldenable
-nnoremap <space> za
-vnoremap <space> zf
+"set nofoldenable
+"nnoremap <space> za
+"vnoremap <space> zf
 
 "Training Tools
 "
@@ -389,3 +409,15 @@ autocmd BufNewFile,BufRead *.hy map  <buffer> <F3> :call g:ToggleAutoHyPythonPre
 
 set cpoptions+=ces$
 
+"some nim stuff from https://github.com/zah/nim.vim
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+autocmd BufNewFile,BufRead *.nim nn <leader>t :call JumpToDef()<cr>
+autocmd BufNewFile,BufRead *.nim ino <leader>t <esc>:call JumpToDef()<cr>i
