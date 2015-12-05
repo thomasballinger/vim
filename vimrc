@@ -225,7 +225,7 @@ if &term =~ '^screen-256color'
 endif
 
 " I'd rather toggle it manually
-"set nofoldenable
+set nofoldenable
 "nnoremap <space> za
 "vnoremap <space> zf
 
